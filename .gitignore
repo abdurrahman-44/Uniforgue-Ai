@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Next.js
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/coverage/
+frontend/playwright-report/
+frontend/test-results/
+
+# Backend runtime & local dev DB / storage
+backend/*.db
+backend/*.db-journal
+backend/storage_data/
+backend/.pytest_cache/
+backend/htmlcov/
+backend/.coverage
+storage_data/
+
+# Environment
+.env
+.env.local
+.env.*.local
+frontend/.env.local
+
+# Logs & OS
+*.log
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json

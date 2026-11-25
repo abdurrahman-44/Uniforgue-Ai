@@ -1,0 +1,39 @@
+name: UNIFORGE AI CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install FFmpeg & Backend Dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+          cd backend && pip install -e ".[dev]"
+      - name: Run Ruff Lint & Pytest Suite
+        run: |
+          cd backend
+          ruff check app tests
+          pytest -v --cov=app
+
+  frontend-test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install & Test Frontend
+        run: |
+          cd frontend
+          npm ci || npm install
+          npm test
+          npm run build
